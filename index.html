@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Room Reservation System - Smart Booking</title>
+    <meta name="description"
+        content="Intelligent hotel room reservation system with optimized travel time calculation and dynamic room allocation across 10 floors.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏨</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <!-- Background Effects -->
+    <div class="bg-gradient"></div>
+    <div class="bg-pattern"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>⚠️ Confirm Action</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="confirmCancel">Cancel</button>
+                <button class="btn btn-primary" id="confirmOk">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" rx="8" fill="url(#logo-gradient)" />
+                        <path d="M12 28V12H16V20H24V12H28V28H24V24H16V28H12Z" fill="white" />
+                        <defs>
+                            <linearGradient id="logo-gradient" x1="0" y1="0" x2="40" y2="40"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#667eea" />
+                                <stop offset="1" stop-color="#764ba2" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="logo-text">
+                        <h1>Grand Vista Hotel</h1>
+                        <p>Smart Reservation System</p>
+                    </div>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalRooms">97</div>
+                        <div class="stat-label">Total Rooms</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="availableRooms">97</div>
+                        <div class="stat-label">Available</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="occupiedRooms">0</div>
+                        <div class="stat-label">Occupied</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <div class="container">
+            <!-- Control Panel -->
+            <section class="control-panel" aria-label="Booking Control Panel">
+                <div class="panel-header">
+                    <h2>Booking Control Panel</h2>
+                    <p>Book up to 5 rooms with optimized travel time</p>
+                </div>
+
+                <div class="booking-form">
+                    <div class="form-group">
+                        <label for="roomCount">Number of Rooms</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="roomCount" min="1" max="5" value="1" class="room-input"
+                                aria-label="Number of rooms to book">
+                            <div class="input-controls">
+                                <button class="input-btn" id="decrementBtn" aria-label="Decrease room count"
+                                    title="Decrease">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M4 8H12" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </button>
+                                <button class="input-btn" id="incrementBtn" aria-label="Increase room count"
+                                    title="Increase">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 4V12M4 8H12" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <span class="input-hint">Maximum 5 rooms per booking</span>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-primary" id="bookBtn"
+                            title="Book the selected number of rooms with optimized travel time">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M10 5V15M5 10H15" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span class="btn-text">Book Rooms</span>
+                            <span class="btn-spinner" style="display: none;">
+                                <svg class="spinner-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"
+                                        stroke-dasharray="50" stroke-dashoffset="25" opacity="0.3" />
+                                </svg>
+                            </span>
+                        </button>
+                        <button class="btn btn-warning" id="undoBtn" title="Undo the last booking (Ctrl+Z)">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M8 5L3 10L8 15M3 10H17" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <span class="btn-text">Undo Last</span>
+                        </button>
+                        <button class="btn btn-secondary" id="randomBtn"
+                            title="Generate random room occupancy for testing">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M3 10H17M3 5H17M3 15H17" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span class="btn-text">Random Occupancy</span>
+                        </button>
+                        <button class="btn btn-outline" id="resetBtn" title="Reset all bookings and clear the hotel">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path
+                                    d="M4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10C16 13.3137 13.3137 16 10 16C8.34315 16 6.84315 15.3284 5.75736 14.2426"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                <path d="M4 14V10H8" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <span class="btn-text">Reset All</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Booking Result -->
+                <div class="booking-result" id="bookingResult" style="display: none;" role="alert" aria-live="polite">
+                    <div class="result-header">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                            <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        <h3>Booking Confirmed</h3>
+                    </div>
+                    <div class="result-content">
+                        <div class="result-item">
+                            <span class="result-label">Booking ID:</span>
+                            <span class="result-value" id="bookingId">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Rooms Booked:</span>
+                            <span class="result-value" id="bookedRooms">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Travel Time:</span>
+                            <span class="result-value" id="travelTime">-</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Booking Strategy:</span>
+                            <span class="result-value" id="strategy">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                        <circle cx="32" cy="32" r="30" stroke="#e5e7eb" stroke-width="4" />
+                        <path d="M32 20V32M32 44H32.02" stroke="#9ca3af" stroke-width="4" stroke-linecap="round" />
+                    </svg>
+                    <h3>All Rooms Occupied</h3>
+                    <p>There are no available rooms at the moment. Please try again later or use the Reset button to
+                        clear all bookings.</p>
+                </div>
+            </section>
+
+            <!-- Hotel Visualization -->
+            <section class="hotel-visualization" aria-label="Hotel Layout Visualization">
+                <div class="viz-header">
+                    <h2>Hotel Layout</h2>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color available" aria-label="Available room indicator"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color occupied" aria-label="Occupied room indicator"></div>
+                            <span>Occupied</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color selected" aria-label="Just booked room indicator"></div>
+                            <span>Just Booked</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="building-container">
+                    <div class="building-side">
+                        <div class="left-column">
+                            <div class="access-indicators">
+                                <div class="access-item lift-indicator">
+                                    <span class="access-icon">🛗</span>
+                                    <span class="access-label">LIFT</span>
+                                </div>
+                                <div class="access-divider"></div>
+                                <div class="access-item stairs-indicator">
+                                    <span class="access-icon">🚶</span>
+                                    <span class="access-label">STAIRS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="floors-container" id="floorsContainer" role="region" aria-label="Hotel floors">
+                        <!-- Floors will be generated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-content">
+            <svg class="toast-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                <path d="M12 8V12M12 16H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <span class="toast-message" id="toastMessage"></span>
+        </div>
+    </div>
+
+    <!-- JavaScript Components (Load in order) -->
+    <script src="js/hotel-model.js"></script>
+    <script src="js/booking-algorithm.js"></script>
+    <script src="js/ui-controller.js"></script>
+    <script src="js/notification-manager.js"></script>
+    <script src="js/storage-manager.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

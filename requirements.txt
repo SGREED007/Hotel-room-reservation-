@@ -1,0 +1,55 @@
+Assessments for SDE 3
+As part of the recruitment process, you are required to complete the assessment mentioned below. A few
+things to note while attempting the assessments.
+● You may upload a google doc with the relevant links (working app link, link to your code
+repository and a google doc with the solution)
+● Please ensure that the privacy of the relevant google docs/files is set to “Anyone with the link”
+● In case you have any questions, you may reach out to us at careers@unstop.com
+● The deadline to complete the assessment is 3 days from the date of registration. In case you
+need an extension please drop us an email at careers@unstop.com
+● Name your file as: YourName_AssessmentSubmission.
+● Please avoid sharing your assessment over email and submit only on the link shared via mail
+https://unstop.com/jobs/software-development-engineer-unstop-942370
+Important Notes:
+● Verify that all links are accessible before submitting.
+● Late submissions will not be considered.
+Assignment : Hotel Room Reservation System
+Problem Statement:
+A hotel has 97 rooms distributed across 10 floors :
+● Floors 1-9: Each floor has 10 rooms , numbered sequentially (e.g., Floor 1: 101-110, Floor 2:
+201-210, and so on).
+● Floor 10 (Top Floor): Has only 7 rooms , numbered 1001-1007 .
+● Building Structure:
+1. A staircase and lift are located on the left side of the building.
+2. Rooms on each floor are arranged sequentially from left to right , with the first room on
+each floor being closest to the stairs/lift.
+● Room Proximity (Travel Time):
+1. Horizontal travel: Moving between two adjacent rooms on the same floor takes 1
+minute per room .
+2. Vertical travel: Moving between floors takes 2 minutes per floor using the stairs/lift.
+● Booking Rules:
+1. A single guest can book up to 5 rooms at a time.
+2. Priority is to book rooms on the same floor first.
+3. If rooms are not available on the same floor, Priority is to book rooms that minimize the
+total travel time between the first and last room in the booking.
+4. If the required number of rooms is unavailable on one floor, booking should span across
+floors, prioritizing rooms that minimize the combined vertical and horizontal travel time.
+Example Scenario:
+1. Available Rooms:
+○ Floor 1: 101, 102, 105, 106
+○ Floor 2: 201, 202, 203, 210
+○ Floor 3: 301, 302
+2. A guest wants to book 4 rooms:
+○ Rooms 101, 102, 105, 106 on Floor 1 will be selected because they minimize total travel
+time.
+3. If only 2 rooms are available on Floor 1 (e.g., 101, 102):
+○ The system will select rooms 201, 202 from Floor 2, as this minimizes vertical (2 minutes)
+and horizontal travel times.
+Your task is to create a room reservation system that dynamically calculates the total travel time between
+booked rooms and optimally assigns rooms based on these rules.
+Deliverables:
+Submit a live url with following functionality:
+- Interface to enter no of rooms and book them.
+- Visualization of booking
+- Button to generate random occupancy on rooms,
+- Button to reset entire booking
