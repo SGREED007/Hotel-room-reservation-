@@ -1,0 +1,21 @@
+/* ===================================
+   MAIN STYLESHEET - IMPORTS ALL MODULES
+   =================================== */
+
+/* 1. Variables & Tokens */
+@import url('css/variables.css');
+
+/* 2. Base & Reset */
+@import url('css/base.css');
+
+/* 3. All other styles from original styles.css */
+/* Note: For full modularization, the remaining 1100+ lines 
+   from styles.css should be split into:
+   - components.css (buttons, cards, modals, etc.)
+   - layout.css (grid, flexbox, containers)
+   - hotel.css (hotel-specific styles)
+   - animations.css (transitions, keyframes)
+   
+   For now, keeping the main styles.css as-is to avoid breaking changes.
+   The css/ folder structure is ready for future modularization.
+*/

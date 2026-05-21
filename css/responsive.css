@@ -1,0 +1,526 @@
+/* ===================================
+   ENHANCED RESPONSIVE DESIGN
+   Complete optimization for all screen sizes
+   =================================== */
+
+/* ===================================
+   LARGE DESKTOP (1920px+)
+   =================================== */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1800px;
+    }
+
+    .header-title {
+        font-size: 3rem;
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+    }
+
+    .room {
+        min-width: 80px;
+        min-height: 80px;
+        font-size: 1rem;
+    }
+}
+
+/* ===================================
+   DESKTOP (1200px - 1919px)
+   =================================== */
+@media (min-width: 1200px) and (max-width: 1919px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* ===================================
+   LAPTOP (992px - 1199px)
+   =================================== */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        max-width: 960px;
+        padding: var(--spacing-lg);
+    }
+
+    .header-title {
+        font-size: 2rem;
+    }
+
+    .rooms-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+}
+
+/* ===================================
+   TABLET LANDSCAPE (768px - 991px)
+   =================================== */
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        max-width: 720px;
+        padding: var(--spacing-md);
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .header-stats {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .building-container {
+        flex-direction: column;
+    }
+
+    .elevator-shaft {
+        width: 100%;
+        height: 80px;
+        flex-direction: row;
+        position: relative;
+    }
+
+    .elevator-shaft svg {
+        width: 400px;
+        height: 80px;
+        transform: rotate(90deg);
+    }
+
+    .floors-container {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+/* ===================================
+   TABLET PORTRAIT (600px - 767px)
+   =================================== */
+@media (min-width: 600px) and (max-width: 767px) {
+    .container {
+        padding: var(--spacing-md);
+    }
+
+    .header-title {
+        font-size: 1.75rem;
+    }
+
+    .header-subtitle {
+        font-size: 0.875rem;
+    }
+
+    .stat-card {
+        padding: var(--spacing-md);
+    }
+
+    .stat-value {
+        font-size: 1.75rem;
+    }
+
+    .control-panel {
+        padding: var(--spacing-lg);
+    }
+
+    .room-input {
+        font-size: 1.5rem;
+        width: 80px;
+        height: 80px;
+    }
+
+    .input-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .rooms-grid {
+        grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+        gap: var(--spacing-sm);
+    }
+
+    .room {
+        min-width: 56px;
+        min-height: 56px;
+    }
+}
+
+/* ===================================
+   MOBILE LANDSCAPE (480px - 599px)
+   =================================== */
+@media (min-width: 480px) and (max-width: 599px) {
+    .container {
+        padding: var(--spacing-sm);
+    }
+
+    .header {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+    }
+
+    .header-stats {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+    }
+
+    .stat-card {
+        flex: 1 1 calc(50% - var(--spacing-sm));
+        min-width: 140px;
+    }
+
+    .control-panel {
+        padding: var(--spacing-md);
+    }
+
+    .panel-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .room-input {
+        font-size: 1.25rem;
+        width: 70px;
+        height: 70px;
+    }
+
+    .input-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .btn {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: 1rem;
+    }
+
+    .floor {
+        padding: var(--spacing-md);
+    }
+
+    .rooms-grid {
+        grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+        gap: var(--spacing-xs);
+    }
+
+    .room {
+        min-width: 52px;
+        min-height: 52px;
+        font-size: 0.7rem;
+    }
+
+    .building-container {
+        flex-direction: column;
+        padding: var(--spacing-sm);
+    }
+
+    .elevator-shaft {
+        display: none;
+        /* Hide on small screens */
+    }
+}
+
+/* ===================================
+   MOBILE PORTRAIT (320px - 479px)
+   =================================== */
+@media (max-width: 479px) {
+    :root {
+        font-size: 14px;
+        /* Reduce base font size */
+    }
+
+    .container {
+        padding: var(--spacing-xs);
+    }
+
+    .header {
+        padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .header-title {
+        font-size: 1.25rem;
+        text-align: center;
+    }
+
+    .header-subtitle {
+        font-size: 0.75rem;
+        text-align: center;
+    }
+
+    .header-stats {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: var(--spacing-xs);
+    }
+
+    .stat-card {
+        flex: 1 1 100%;
+        padding: var(--spacing-sm);
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+
+    .control-panel {
+        padding: var(--spacing-sm);
+    }
+
+    .panel-header h2 {
+        font-size: 1.125rem;
+    }
+
+    .room-count-selector {
+        gap: var(--spacing-sm);
+    }
+
+    .room-input {
+        font-size: 1.125rem;
+        width: 60px;
+        height: 60px;
+    }
+
+    .input-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xs);
+    }
+
+    .btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.875rem;
+        min-height: 48px;
+    }
+
+    .floor {
+        padding: var(--spacing-sm);
+    }
+
+    .floor-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+
+    .floor-number {
+        font-size: 0.875rem;
+    }
+
+    .floor-info {
+        font-size: 0.75rem;
+    }
+
+    .rooms-grid {
+        grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+        gap: 4px;
+    }
+
+    .room {
+        min-width: 48px;
+        min-height: 48px;
+        font-size: 0.65rem;
+        padding: 4px;
+    }
+
+    .room-number {
+        font-size: 0.65rem;
+    }
+
+    .room-status {
+        font-size: 0.75rem;
+    }
+
+    .building-container {
+        flex-direction: column;
+        padding: var(--spacing-xs);
+    }
+
+    .elevator-shaft {
+        display: none;
+        /* Hide on mobile */
+    }
+
+    .booking-result {
+        padding: var(--spacing-sm);
+    }
+
+    .result-header h3 {
+        font-size: 1rem;
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .toast {
+        bottom: var(--spacing-sm);
+        left: var(--spacing-sm);
+        right: var(--spacing-sm);
+        max-width: none;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: var(--spacing-sm);
+        padding: 0;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: var(--spacing-md);
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+}
+
+/* ===================================
+   EXTRA SMALL MOBILE (< 320px)
+   =================================== */
+@media (max-width: 319px) {
+    :root {
+        font-size: 12px;
+    }
+
+    .header-title {
+        font-size: 1rem;
+    }
+
+    .room {
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 0.6rem;
+    }
+
+    .rooms-grid {
+        grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+    }
+}
+
+/* ===================================
+   LANDSCAPE ORIENTATION
+   =================================== */
+@media (max-height: 600px) and (orientation: landscape) {
+    .header {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .header-title {
+        font-size: 1.25rem;
+    }
+
+    .control-panel {
+        padding: var(--spacing-md);
+    }
+
+    .floor {
+        padding: var(--spacing-sm);
+    }
+
+    .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+/* ===================================
+   PRINT STYLES
+   =================================== */
+@media print {
+
+    .bg-gradient,
+    .bg-pattern,
+    .loading-overlay,
+    .toast,
+    .modal,
+    .control-panel,
+    .btn {
+        display: none !important;
+    }
+
+    .header {
+        background: white !important;
+        box-shadow: none !important;
+    }
+
+    .floor {
+        page-break-inside: avoid;
+        border: 1px solid #000;
+    }
+
+    .room {
+        border: 1px solid #000;
+    }
+}
+
+/* ===================================
+   HIGH CONTRAST MODE
+   =================================== */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-500: #0000ff;
+        --success: #008000;
+        --error: #ff0000;
+        --gray-900: #000000;
+    }
+
+    .room {
+        border-width: 2px;
+    }
+
+    .btn {
+        border-width: 2px;
+    }
+}
+
+/* ===================================
+   DARK MODE SUPPORT (Future Enhancement)
+   =================================== */
+@media (prefers-color-scheme: dark) {
+    /* Uncomment when implementing dark mode */
+    /*
+    :root {
+        --gray-50: #1f2937;
+        --gray-100: #374151;
+        --gray-900: #f9fafb;
+    }
+    
+    body {
+        background: var(--gray-900);
+        color: var(--gray-50);
+    }
+    */
+}
